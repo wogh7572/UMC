@@ -1,1 +1,15 @@
-//
+//해시태그를 통한 책 검색
+select b.*
+from book as b
+inner join book_hash_tag as bht on b.id = bht.book_id
+inner join hash_tag as ht on bht.hash_tag_id = ht.id
+where ht.name = 'UMC';
+
+
+//인기 순 정렬에 대한 쿼리
+select * from book as b
+join (select count(*) as like_count
+				 from book_likes 
+					group by book_id) as likes on b.id = likes.book_id
+order by likes.like_count desc
+limit 15 offset (n - 1) * 15;
