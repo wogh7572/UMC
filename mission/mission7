@@ -1,15 +1,169 @@
-//해시태그를 통한 책 검색
-select b.*
-from book as b
-inner join book_hash_tag as bht on b.id = bht.book_id
-inner join hash_tag as ht on bht.hash_tag_id = ht.id
-where ht.name = 'UMC';
 
 
-//인기 순 정렬에 대한 쿼리
-select * from book as b
-join (select count(*) as like_count
-				 from book_likes 
-					group by book_id) as likes on b.id = likes.book_id
-order by likes.like_count desc
-limit 15 offset (n - 1) * 15;
+CREATE TABLE `Untitled` (
+	`id`	bigint	NOT NULL,
+	`age`	int	NULL,
+	`name`	varchar	NULL,
+	`phone`	int	NULL,
+	`address`	varchar(20)	NULL,
+	`birth`	int	NULL,
+	`menu`	varchar(20)	NULL,
+	`Certification`	bool	NULL,
+	`state`	bool	NULL,
+	`inactive`	bool	NULL,
+	`Field`	int	NULL,
+	`id2`	bigint	NOT NULL
+);
+
+CREATE TABLE `Untitled2` (
+	`Key`	int	NOT NULL,
+	`name`	varchar	NULL,
+	`address`	varchar	NULL,
+	`Field`	varchar	NULL,
+	`menu`	varchar	NULL,
+	`num`	int	NULL,
+	`time`	int	NULL
+);
+
+CREATE TABLE `review` (
+	`id`	int	NOT NULL,
+	`user_id`	bigint	NOT NULL,
+	`store_id`	int	NOT NULL,
+	`nick`	varchar	NULL,
+	`star`	int	NULL,
+	`describe`	varchar	NULL,
+	`img`	img	NULL,
+	`reply`	varchar	NULL,
+	`Field6`	int	NULL
+);
+
+CREATE TABLE `Untitled4` (
+	`int`	int	NOT NULL,
+	`Key`	int	NOT NULL,
+	`name`	varchar	NULL,
+	`info`	varchar	NULL,
+	`create_day`	int	NULL,
+	`end_day`	int	NULL
+);
+
+CREATE TABLE `Untitled5` (
+	`Key2`	varchar	NOT NULL,
+	`Field`	varchar	NULL,
+	`title`	varchar	NULL,
+	`describe`	varchar	NULL,
+	`create_day`	int	NULL,
+	`Key`	bigint	NOT NULL
+);
+
+CREATE TABLE `Untitled6` (
+	`Key2`	int	NOT NULL,
+	`title`	varchar	NULL,
+	`describe`	varchar	NULL,
+	`create_day`	int	NULL,
+	`Key`	bigint	NOT NULL
+);
+
+CREATE TABLE `Untitled7` (
+	`Key`	bigint	NOT NULL,
+	`Key2`	bigint	NOT NULL,
+	`Key3`	int	NOT NULL,
+	`ing`	varchar	NULL,
+	`ed`	varchar	NULL,
+	`my`	varchar	NULL,
+	`now`	int	NULL,
+	`sum`	int	NULL
+);
+
+CREATE TABLE `Untitled8` (
+	`food`	VARCHAR(255)	NOT NULL,
+	`id`	bigint	NOT NULL,
+	`Field`	VARCHAR(255)	NULL
+);
+
+ALTER TABLE `Untitled` ADD CONSTRAINT `PK_UNTITLED` PRIMARY KEY (
+	`id`
+);
+
+ALTER TABLE `Untitled2` ADD CONSTRAINT `PK_UNTITLED2` PRIMARY KEY (
+	`Key`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `PK_REVIEW` PRIMARY KEY (
+	`id`,
+	`user_id`,
+	`store_id`
+);
+
+ALTER TABLE `Untitled4` ADD CONSTRAINT `PK_UNTITLED4` PRIMARY KEY (
+	`int`,
+	`Key`
+);
+
+ALTER TABLE `Untitled5` ADD CONSTRAINT `PK_UNTITLED5` PRIMARY KEY (
+	`Key2`
+);
+
+ALTER TABLE `Untitled6` ADD CONSTRAINT `PK_UNTITLED6` PRIMARY KEY (
+	`Key2`
+);
+
+ALTER TABLE `Untitled7` ADD CONSTRAINT `PK_UNTITLED7` PRIMARY KEY (
+	`Key`,
+	`Key2`,
+	`Key3`
+);
+
+ALTER TABLE `Untitled8` ADD CONSTRAINT `PK_UNTITLED8` PRIMARY KEY (
+	`food`,
+	`id`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `FK_Untitled_TO_review_1` FOREIGN KEY (
+	`user_id`
+)
+REFERENCES `Untitled` (
+	`id`
+);
+
+ALTER TABLE `review` ADD CONSTRAINT `FK_Untitled2_TO_review_1` FOREIGN KEY (
+	`store_id`
+)
+REFERENCES `Untitled2` (
+	`Key`
+);
+
+ALTER TABLE `Untitled4` ADD CONSTRAINT `FK_Untitled2_TO_Untitled4_1` FOREIGN KEY (
+	`Key`
+)
+REFERENCES `Untitled2` (
+	`Key`
+);
+
+ALTER TABLE `Untitled7` ADD CONSTRAINT `FK_Untitled_TO_Untitled7_1` FOREIGN KEY (
+	`Key`
+)
+REFERENCES `Untitled` (
+	`id`
+);
+
+ALTER TABLE `Untitled7` ADD CONSTRAINT `FK_Untitled4_TO_Untitled7_1` FOREIGN KEY (
+	`Key2`
+)
+REFERENCES `Untitled4` (
+	`int`
+);
+
+ALTER TABLE `Untitled7` ADD CONSTRAINT `FK_Untitled4_TO_Untitled7_2` FOREIGN KEY (
+	`Key3`
+)
+REFERENCES `Untitled4` (
+	`Key`
+);
+
+ALTER TABLE `Untitled8` ADD CONSTRAINT `FK_Untitled_TO_Untitled8_1` FOREIGN KEY (
+	`id`
+)
+REFERENCES `Untitled` (
+	`id`
+);
+
